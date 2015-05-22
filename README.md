@@ -14,11 +14,16 @@ There are a few bits special:
 
 ### my tips for flux ( in chinese )
 
-reflux 对 flux 作了一些简化，非常有效的简化，这让 flux 在开发效率上大大提高，但 reflux 相对来说，更适合于小项目。而 flux 在 store 上由于要注册  actions 的一些操作，这些代码编码比较复杂。 如果采用 ES6 , 这里有一个非常好的例子，可以大大简化 flux 的代码编码 https://github.com/gaearon/flux-react-router-example  ， 这个例子中 store 的编码非常高效，主要得益于 decorators  （ 看 https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750  与 https://github.com/wycats/javascript-decorators ）
+reflux 对 flux 作了一些简化，非常有效的简化，这让 flux 在开发效率上大大提高，但 reflux 相对来说，更适合于小项目。
+而 flux 在 store 上由于要注册  actions 的一些操作，这些代码编码比较复杂。
+如果采用 ES6 , 这里有一个非常好的例子，可以大大简化 flux 的代码编码 https://github.com/gaearon/flux-react-router-example
+这个例子中 store 的编码非常高效，主要得益于 decorators  （ 看 https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750  与 https://github.com/wycats/javascript-decorators ）
 
 
 ### reference
 
+* todo: need more attention for [react and ES6](https://github.com/facebook/react/issues/613)
+* [autobinding-react-and-es6-classes](http://www.ian-thomas.net/autobinding-react-and-es6-classes/)
 * important archive: [the-case-for-flux](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6)
 * important archive: [async-requests-with-react-js-and-flux-revisited](http://www.code-experience.com/async-requests-with-react-js-and-flux-revisited/)
 * [@dan_abramov react list](https://medium.com/@dan_abramov/my-react-list-862227952a8c)
@@ -85,5 +90,3 @@ In most social apps, you'll have lots of these and you want to be able to quickl
 ```
 
 See and run the source for more tips!
-
-
