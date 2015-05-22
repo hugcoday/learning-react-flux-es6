@@ -13,46 +13,22 @@ function parseFullName(params) {
   return params.login + (params.name ? '/' + params.name : '');
 }
 
-function checkAuthToken() {
-
-  /*
-  // set token
-  var token = {
-    userId: 101,
-    userName: 'test',
-    logined: true
-  };
-
-  localStorage.setItem('token', JSON.stringify(token));
-  */
-
-  //var memory = window.localStorage || ( windows.UserDataStorage && new UserDataStorage()) || new cookieStorage();
-
-  let token = sessionStorage.getItem('token');
-  return token.logined ? true : false;
-
-
-}
-
-export default class Explore extends Component {
-
-  // define proptypes for props that transfer from react-router
+export default class Auth extends Component {
   static propTypes = {
     params: PropTypes.shape({
       login: PropTypes.string,
-      name: PropTypes.string
-    })
+      name: PropTypes.string,
+      password: propTypes.string
+    }),
+    token: propTypes.string
   };
 
-  // for react-router
   static contextTypes = {
     router: PropTypes.func.isRequired
   };
 
-  // only for pureComponent
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  //
   constructor(props) {
     super(props);
 
@@ -65,8 +41,7 @@ export default class Explore extends Component {
     // that's what we need to we can update the input both in response to route
     // change and in response to user typing.
     this.state = {
-      loginOrRepo: parseFullName(props.params),
-      token: checkAuthToken()
+      loginOrRepo: parseFullName(props.params)
     };
   }
 
