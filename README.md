@@ -1,23 +1,25 @@
 Learning React Flux via ES6
 =========================
 
-fork form [flux-react-router-example](https://github.com/gaearon/flux-react-router-example)
-thanks [Dan Abramov <dan.abramov@me.com>](http://github.com/gaearon)
+* fork form [flux-react-router-example](https://github.com/gaearon/flux-react-router-example)
+* thanks [Dan Abramov <dan.abramov@me.com>](http://github.com/gaearon) and facebook!
 
-reference
----------
-There are a few bits here I was especially interested in:
+## high-light
+There are a few bits special:
 
-* It uses vanilla [Flux architecture](https://github.com/facebook/flux) and [React Router](https://github.com/rackt/react-router);
-* It can show user page with partial known info and load details on the go;
-* It supports pagination both for users and repos;
 * It parses Github's nested JSON responses with [Normalizr](https://github.com/gaearon/normalizr);
 * Content Stores [don't need to contain a giant `switch` with actions](https://github.com/gaearon/flux-react-router-example/blob/82a27eb85227ef85129e8bf0444e0f8d9abd6406/scripts/stores/UserStore.js#L18-L22);
-* “Back” is immediate (because all data is in Stores);
 * Router handlers are updated gracefully in `componentWillReceiveProps` if some page is requested with a different parameter;
+* built in ES6 using [Babel](https://babeljs.io) and [Webpack](https://github.com/webpack/webpack), and has [React Hot Loader](http://gaearon.github.io/react-hot-loader/) integrated.
+
+### reference
+
+* important archive: [the-case-for-flux](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6)
+* important archive: [async-requests-with-react-js-and-flux-revisited](http://www.code-experience.com/async-requests-with-react-js-and-flux-revisited/)
+* [@dan_abramov react list](https://medium.com/@dan_abramov/my-react-list-862227952a8c)
+* important archive: [understanding facebook flux (chinese)](http://undefinedblog.com/facebook-flux/)
 * [“Dumb”](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) components use [pure rendering](https://github.com/gaearon/react-pure-render) as a performance optimization;
-* It demonstrates usage of [higher-order components](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) through [decorators](https://github.com/wycats/javascript-decorators) (experimental);
-* It is is built in ES6 using [Babel](https://babeljs.io) and [Webpack](https://github.com/webpack/webpack), and has [React Hot Loader](http://gaearon.github.io/react-hot-loader/) integrated.
+* [higher-order components](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) through [decorators](https://github.com/wycats/javascript-decorators) (experimental);
 
 ### Running
 
