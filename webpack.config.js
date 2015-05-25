@@ -19,25 +19,34 @@ module.exports = {
 		new webpack.NoErrorsPlugin()
 	],
 	resolve: {
-		extensions: ['', '.js','jsx']
+		extensions: ['', '.js', 'jsx']
 	},
 	module: {
+		/*
+		preLoaders: [
+			{
+				test: /\.js(x)?$/,
+				exclude: /node_modules/,
+				loader: 'eslint-loader'
+			}
+		],
+		*/
 		loaders: [
-      {
-      test: /\.js(x)?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot-loader',
-      include: path.join(__dirname, 'scripts')
-      },
-      {
-			test: /\.js(x)?$/,
-			exclude: /node_modules/,
-			loader: 'babel',
-      query:{
-        optional:['runtime','es7.classProperties','es7.decorators'],
-        stage:1
-      },
-			include: path.join(__dirname, 'scripts')
-		}]
+			{
+				test: /\.js(x)?$/,
+				exclude: /node_modules/,
+				loader: 'react-hot-loader',
+				include: path.join(__dirname, 'scripts')
+			},
+			{
+				test: /\.js(x)?$/,
+				exclude: /node_modules/,
+				loader: 'babel',
+				query: {
+					optional: ['runtime', 'es7.classProperties', 'es7.decorators'],
+					stage: 1
+				},
+				include: path.join(__dirname, 'scripts')
+			}]
 	}
 };
