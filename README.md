@@ -19,9 +19,14 @@ reflux 对 flux 作了一些简化，非常有效的简化，这让 flux 在开�
 如果采用 ES6 , 这里有一个非常好的例子，可以大大简化 flux 的代码编码 https://github.com/gaearon/flux-react-router-example
 这个例子中 store 的编码非常高效，主要得益于 decorators  （ 看 https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750  与 https://github.com/wycats/javascript-decorators ）
 
+### JS dev stack
+*  [json server](https://github.com/typicode/json-server) a simplest RESTfull server for JS dev, must.
+
 
 ### reference
 
+* [the-two-pillars-of-javascript (part I)](https://medium.com/javascript-scene/the-two-pillars-of-javascript-ee6f3281e7f3)
+and [(part II)](https://medium.com/javascript-scene/the-two-pillars-of-javascript-pt-2-functional-programming-a63aa53a41a4)
 * todo: need more attention for [react and ES6](https://github.com/facebook/react/issues/613)
 * [autobinding-react-and-es6-classes](http://www.ian-thomas.net/autobinding-react-and-es6-classes/)
 * important archive: [the-case-for-flux](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6)
