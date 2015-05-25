@@ -14,7 +14,7 @@ export function requestUser(login, fields) {
     request: ActionTypes.REQUEST_USER,
     success: ActionTypes.REQUEST_USER_SUCCESS,
     failure: ActionTypes.REQUEST_USER_ERROR
-  }, {login});
+  }, { login });
 }
 
 export function requestStargazerPage(fullName, isInitialRequest) {
@@ -35,5 +35,5 @@ export function requestStargazerPage(fullName, isInitialRequest) {
     request: ActionTypes.REQUEST_STARGAZER_PAGE,
     success: ActionTypes.REQUEST_STARGAZER_PAGE_SUCCESS,
     failure: ActionTypes.REQUEST_STARGAZER_PAGE_ERROR
-  }, {fullName});
+  }, { fullName });
 }

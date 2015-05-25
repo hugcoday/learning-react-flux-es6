@@ -7,9 +7,7 @@ import RepoStore from '../stores/RepoStore';
 import Repo from '../components/Repo';
 import User from '../components/User';
 import DocumentTitle from 'react-document-title';
-/* eslint-disable no-unused-vars */
 import connectToStores from '../utils/connectToStores';
-/* eslint-enable no-unused-vars */
 
 function parseFullName(params) {
   return `${params.login}/${params.name}`;
@@ -29,7 +27,7 @@ function requestData(props) {
 /**
  * Retrieves state from stores for current props.
  */
-function getState(props) { // eslint-disable-line no-unused-vars
+function getState(props) {
   const fullName = parseFullName(props.params);
 
   const repo = RepoStore.get(fullName);
@@ -48,10 +46,7 @@ function getState(props) { // eslint-disable-line no-unused-vars
   };
 }
 
-/* eslint-disable no-unused-vars */
-const stores = [RepoStore, StargazersByRepoStore, UserStore];
-@connectToStores(stores, getState)
-/* eslint-enable no-unused-vars */
+@connectToStores([RepoStore, StargazersByRepoStore, UserStore], getState)
 export default class RepoPage {
   static propTypes = {
     // Injected by React Router:
@@ -88,49 +83,49 @@ export default class RepoPage {
     const fullName = parseFullName(params);
 
     return (
-        <DocumentTitle title={`Stargazers of ${fullName}`}>
-          <div>
-            {repo && owner ?
-                <Repo repo={repo} owner={owner}/> :
-                <h5>Loading {fullName}...</h5>
-            }
+      <DocumentTitle title={`Stargazers of ${fullName}`}>
+        <div>
+          {repo && owner ?
+            <Repo repo={repo} owner={owner} /> :
+            <h1>Loading {fullName}...</h1>
+          }
 
-            <h4>Stargazers</h4>
-            {this.renderStargazers()}
-          </div>
-        </DocumentTitle>
+          <h2>Stargazers</h2>
+          {this.renderStargazers()}
+        </div>
+      </DocumentTitle>
     );
   }
 
   renderStargazers() {
     const {
-        stargazers,
-        isLoadingStargazers: isLoading,
-        isLastPageOfStargazers: isLastPage
-        } = this.props;
+      stargazers,
+      isLoadingStargazers: isLoading,
+      isLastPageOfStargazers: isLastPage
+    } = this.props;
     const isEmpty = stargazers.length === 0;
 
     return (
-        <div class="flow-text">
-          {stargazers.map(user =>
-                  <User key={user.login} user={user}/>
-          )}
+      <div>
+        {stargazers.map(user =>
+          <User key={user.login} user={user} />
+        )}
 
-          {isEmpty && !isLoading &&
+        {isEmpty && !isLoading &&
           <span>None :-(</span>
-          }
+        }
 
-          {isEmpty && isLoading &&
+        {isEmpty && isLoading &&
           <span>Loading...</span>
-          }
+        }
 
-          {!isEmpty && (isLoading || !isLastPage) &&
+        {!isEmpty && (isLoading || !isLastPage) &&
           <button onClick={this.handleLoadMoreClick}
                   disabled={isLoading}>
             {isLoading ? 'Loading...' : 'Load more'}
           </button>
-          }
-        </div>
+        }
+      </div>
     );
   }
 

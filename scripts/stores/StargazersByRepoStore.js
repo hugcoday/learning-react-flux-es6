@@ -3,9 +3,9 @@ import ActionTypes from '../constants/ActionTypes';
 import RepoStore from './RepoStore';
 import UserStore from './UserStore';
 import {
-    createIndexedListStore,
-    createListActionHandler
-    } from '../utils/PaginatedStoreUtils';
+  createIndexedListStore,
+  createListActionHandler
+} from '../utils/PaginatedStoreUtils';
 
 const StargazersByRepoStore = createIndexedListStore({
   getUsers(repoFullName) {
@@ -27,9 +27,9 @@ register(action => {
   const { fullName } = action;
   if (fullName) {
     handleListAction(
-        action,
-        StargazersByRepoStore.getList(fullName),
-        StargazersByRepoStore.emitChange
+      action,
+      StargazersByRepoStore.getList(fullName),
+      StargazersByRepoStore.emitChange
     );
   }
 });

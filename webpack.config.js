@@ -35,8 +35,7 @@ module.exports = {
 			loader: 'babel',
       query:{
         optional:['runtime','es7.classProperties','es7.decorators'],
-        stage:1,
-        cacheDirectory:true
+        stage:1
       },
 			include: path.join(__dirname, 'scripts')
 		}]

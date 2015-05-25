@@ -3,9 +3,9 @@ import ActionTypes from '../constants/ActionTypes';
 import RepoStore from './RepoStore';
 import UserStore from './UserStore';
 import {
-    createIndexedListStore,
-    createListActionHandler
-    } from '../utils/PaginatedStoreUtils';
+  createIndexedListStore,
+  createListActionHandler
+} from '../utils/PaginatedStoreUtils';
 
 const StarredReposByUserStore = createIndexedListStore({
   getRepos(userLogin) {
@@ -27,9 +27,9 @@ register(action => {
   const { login } = action;
   if (login) {
     handleListAction(
-        action,
-        StarredReposByUserStore.getList(login),
-        StarredReposByUserStore.emitChange
+      action,
+      StarredReposByUserStore.getList(login),
+      StarredReposByUserStore.emitChange
     );
   }
 });

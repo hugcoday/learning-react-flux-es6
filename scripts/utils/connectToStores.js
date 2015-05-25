@@ -10,43 +10,47 @@ import shallowEqual from 'react-pure-render/shallowEqual';
  * Read more about decorators: https://github.com/wycats/javascript-decorators
  */
 export default function connectToStores(stores, getState) {
-	return function (DecoratedComponent) {
-		const displayName =
-			DecoratedComponent.displayName ||
-			DecoratedComponent.name ||
-			'Component';
+  return function (DecoratedComponent) {
+    const displayName =
+      DecoratedComponent.displayName ||
+      DecoratedComponent.name ||
+      'Component';
 
-		return class StoreConnector extends Component {
-			static displayName = `connectToStores(${displayName})`;  //template string
+    return class StoreConnector extends Component {
+      static displayName = `connectToStores(${displayName})`;
 
-			constructor(props) {
-				super(props);
-				this.handleStoresChanged = this.handleStoresChanged.bind(this);
-				this.state = getState(props);
-			}
+      constructor(props) {
+        super(props);
+        this.handleStoresChanged = this.handleStoresChanged.bind(this);
 
-			componentWillMount() {
-				stores.forEach(store => store.addChangeListener(this.handleStoresChanged));
-			}
+        this.state = getState(props);
+      }
 
-			componentWillReceiveProps(nextProps) {
-				if (!shallowEqual(nextProps, this.props)) {
-					this.setState(getState(nextProps));
-				}
-			}
+      componentWillMount() {
+        stores.forEach(store =>
+          store.addChangeListener(this.handleStoresChanged)
+        );
+      }
 
-			componentWillUnmount() {
-				stores.forEach(store => store.removeChangeListener(this.handleStoresChanged)
-				);
-			}
+      componentWillReceiveProps(nextProps) {
+        if (!shallowEqual(nextProps, this.props)) {
+          this.setState(getState(nextProps));
+        }
+      }
 
-			handleStoresChanged() {
-				this.setState(getState(this.props));
-			}
+      componentWillUnmount() {
+        stores.forEach(store =>
+          store.removeChangeListener(this.handleStoresChanged)
+        );
+      }
 
-			render() {
-				return <DecoratedComponent {...this.props} {...this.state} />;
-			}
-		};
-	};
+      handleStoresChanged() {
+        this.setState(getState(this.props));
+      }
+
+      render() {
+        return <DecoratedComponent {...this.props} {...this.state} />;
+      }
+    };
+  };
 }

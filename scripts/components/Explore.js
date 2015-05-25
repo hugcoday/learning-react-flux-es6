@@ -1,7 +1,6 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-//initial default entry parameter and reference URI
 const DEFAULT_LOGIN = 'gaearon';
 const GITHUB_REPO = 'https://github.com/gaearon/flux-react-router-example';
 
@@ -13,30 +12,7 @@ function parseFullName(params) {
   return params.login + (params.name ? '/' + params.name : '');
 }
 
-function checkAuthToken() {
-
-  /*
-  // set token
-  var token = {
-    userId: 101,
-    userName: 'test',
-    logined: true
-  };
-
-  localStorage.setItem('token', JSON.stringify(token));
-  */
-
-  //var memory = window.localStorage || ( windows.UserDataStorage && new UserDataStorage()) || new cookieStorage();
-
-  let token = sessionStorage.getItem('token');
-  return token.logined ? true : false;
-
-
-}
-
 export default class Explore extends Component {
-
-  // define proptypes for props that transfer from react-router
   static propTypes = {
     params: PropTypes.shape({
       login: PropTypes.string,
@@ -44,15 +20,12 @@ export default class Explore extends Component {
     })
   };
 
-  // for react-router
   static contextTypes = {
     router: PropTypes.func.isRequired
   };
 
-  // only for pureComponent
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  //
   constructor(props) {
     super(props);
 
@@ -65,8 +38,7 @@ export default class Explore extends Component {
     // that's what we need to we can update the input both in response to route
     // change and in response to user typing.
     this.state = {
-      loginOrRepo: parseFullName(props.params),
-      token: checkAuthToken()
+      loginOrRepo: parseFullName(props.params)
     };
   }
 
@@ -78,16 +50,16 @@ export default class Explore extends Component {
 
   render() {
     return (
-        <div className='Explore'>
-          <p>Type a username or repo full name and hit 'Go':</p>
-          <input size='45'
-                 ref='loginOrRepo'
-                 onKeyUp={this.handleKeyUp}
-                 onChange={this.handleOnChange}
-                 value={this.state.loginOrRepo}/>
-          <button onClick={this.handleGoClick}>Go!</button>
-          <p class="flow-text">Code on <a href={GITHUB_REPO} target='_blank'>Github</a>.</p>
-        </div>
+      <div className='Explore'>
+        <p>Type a username or repo full name and hit 'Go':</p>
+        <input size='45'
+               ref='loginOrRepo'
+               onKeyUp={this.handleKeyUp}
+               onChange={this.handleOnChange}
+               value={this.state.loginOrRepo} />
+        <button onClick={this.handleGoClick}>Go!</button>
+        <p>Code on <a href={GITHUB_REPO} target='_blank'>Github</a>.</p>
+      </div>
     );
   }
 

@@ -7,11 +7,7 @@ import UserStore from '../stores/UserStore';
 import User from '../components/User';
 import Repo from '../components/Repo';
 import DocumentTitle from 'react-document-title';
-
-/* eslint-disable no-unused-vars */
 import connectToStores from '../utils/connectToStores';
-/* eslint-enable no-unused-vars */
-
 
 function parseLogin(params) {
   return params.login;
@@ -31,7 +27,7 @@ function requestData(props) {
 /**
  * Retrieves state from stores for current props.
  */
-function getState(props) { // eslint-disable-line no-unused-vars
+function getState(props) {
   const login = parseLogin(props.params);
 
   const user = UserStore.get(login);
@@ -50,10 +46,7 @@ function getState(props) { // eslint-disable-line no-unused-vars
   };
 }
 
-/* eslint-disable no-unused-vars */
-const stores = [StarredReposByUserStore, UserStore, RepoStore];
-@connectToStores(stores, getState)
-/* eslint-enable no-unused-vars */
+@connectToStores([StarredReposByUserStore, UserStore, RepoStore], getState)
 export default class UserPage {
   static propTypes = {
     // Injected by React Router:
@@ -89,52 +82,52 @@ export default class UserPage {
     const login = parseLogin(params);
 
     return (
-        <DocumentTitle title={`Starred by ${login}`}>
-          <div>
-            {user ?
-                <User user={user}/> :
-                <h5>Loading...</h5>
-            }
+      <DocumentTitle title={`Starred by ${login}`}>
+        <div>
+          {user ?
+            <User user={user} /> :
+            <h1>Loading...</h1>
+          }
 
-            <h5>Starred repos</h5>
-            {this.renderStarredRepos()}
-          </div>
-        </DocumentTitle>
+          <h1>Starred repos</h1>
+          {this.renderStarredRepos()}
+        </div>
+      </DocumentTitle>
     );
   }
 
   renderStarredRepos() {
     const {
-        starred,
-        starredOwners,
-        isLoadingStarred: isLoading,
-        isLastPageOfStarred: isLastPage
-        } = this.props;
+      starred,
+      starredOwners,
+      isLoadingStarred: isLoading,
+      isLastPageOfStarred: isLastPage
+    } = this.props;
     const isEmpty = starred.length === 0;
 
     return (
-        <div>
-          {starred.map((repo, index) =>
-                  <Repo key={repo.fullName}
-                        repo={repo}
-                        owner={starredOwners[index]}/>
-          )}
+      <div>
+        {starred.map((repo, index) =>
+          <Repo key={repo.fullName}
+                repo={repo}
+                owner={starredOwners[index]} />
+        )}
 
-          {isEmpty && !isLoading &&
+        {isEmpty && !isLoading &&
           <span>None :-(</span>
-          }
+        }
 
-          {isEmpty && isLoading &&
+        {isEmpty && isLoading &&
           <span>Loading...</span>
-          }
+        }
 
-          {!isEmpty && (isLoading || !isLastPage) &&
+        {!isEmpty && (isLoading || !isLastPage) &&
           <button onClick={this.handleLoadMoreClick}
                   disabled={isLoading}>
             {isLoading ? 'Loading...' : 'Load more'}
           </button>
-          }
-        </div>
+        }
+      </div>
     );
   }
 

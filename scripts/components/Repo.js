@@ -11,22 +11,21 @@ export default class Repo {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    let { repo, owner } = this.props;
+    const { repo, owner } = this.props;
 
     return (
-        <div className='Repo'>
-          <h6>
-            <Link to='repo' params={{ login: owner.login, name: repo.name }}>
-              {repo.name}
-            </Link>
-            {' by '}
-            <Link to='user' params={{ login: owner.login }}>
-              {owner.login}
-            </Link>
-          </h6>
-
-          <p class="flow-text">{repo.description}</p>
-        </div>
+      <div className='Repo'>
+        <h3>
+          <Link to='repo' params={{ login: owner.login, name: repo.name }}>
+            {repo.name}
+          </Link>
+          {' by '}
+          <Link to='user' params={{ login: owner.login }}>
+            {owner.login}
+          </Link>
+        </h3>
+        <p>{repo.description}</p>
+      </div>
     );
   }
 }
