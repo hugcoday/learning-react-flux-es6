@@ -43,6 +43,7 @@ function fetchAndNormalize(url, schema) {
     url = API_ROOT + url;
   }
 
+  console.log("AJAX fetch:" + url + " schema: " + schema);
   return fetch(url).then((response) =>
     response.json().then((json) => {
       const camelizedJson = camelizeKeys(json);
