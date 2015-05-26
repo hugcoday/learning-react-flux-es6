@@ -14,6 +14,7 @@ const UserStore = createStore({
   }
 });
 
+// dispatchToken
 UserStore.dispatchToken = register(action => {
   const responseUsers = selectn('response.entities.users', action);
   if (responseUsers) {
