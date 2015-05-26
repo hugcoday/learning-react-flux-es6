@@ -43,8 +43,8 @@ function fetchAndNormalize(url, schema) {
     url = API_ROOT + url;
   }
 
-  return fetch(url).then(response =>
-    response.json().then(json => {
+  return fetch(url).then((response) =>
+    response.json().then((json) => {
       const camelizedJson = camelizeKeys(json);
       const nextPageUrl = getNextPageUrl(response) || undefined;
 
