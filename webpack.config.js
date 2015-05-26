@@ -1,20 +1,27 @@
 /* eslint-disable no-var */
 var path = require('path');
 var webpack = require('webpack');
+var nodeModulesPath = path.resolve(__dirname, 'node_modules'),
+		srcPath = path.resolve(__dirname, 'scripts'),
+		distPath = path.resolve(__dirname, 'build');
 
 module.exports = {
-	entry: [
-		'webpack-dev-server/client?http://localhost:3000',
-		'webpack/hot/only-dev-server',
-		'./scripts/index'
-	],
+	entry: {
+		app: [
+			'webpack-dev-server/client?http://localhost:3000',
+			'webpack/hot/only-dev-server',
+			'./scripts/index'
+		]
+		//vendors: ['react', 'react-router', 'flux']
+	},
 	devtool: 'eval-source-map',
 	output: {
-		path: __dirname,
+		path: path.resolve(__dirname, 'build/js'),
 		filename: 'bundle.js',
 		publicPath: '/static/'
 	},
 	plugins: [
+		//new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	],
@@ -34,13 +41,13 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.js(x)?$/,
-				exclude: /node_modules/,
+				exclude: [nodeModulesPath],
 				loader: 'react-hot-loader',
 				include: path.join(__dirname, 'scripts')
 			},
 			{
 				test: /\.js(x)?$/,
-				exclude: /node_modules/,
+				exclude: [nodeModulesPath],
 				loader: 'babel',
 				query: {
 					optional: ['runtime', 'es7.classProperties', 'es7.decorators'],
