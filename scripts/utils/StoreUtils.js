@@ -8,6 +8,7 @@ export function createStore(spec) {
   const emitter = new EventEmitter();
   emitter.setMaxListeners(0);
 
+  // Object.assign to create object
   const store = Object.assign({
     emitChange() {
       emitter.emit(CHANGE_EVENT);
@@ -32,6 +33,7 @@ export function createStore(spec) {
   return store;
 }
 
+// check data in store  via key
 export function isInBag(bag, id, fields) {
   let item = bag[id];
   if (!bag[id]) {
@@ -45,6 +47,7 @@ export function isInBag(bag, id, fields) {
   }
 }
 
+// merge data into store
 export function mergeIntoBag(bag, entities) {
   for (let id in entities) {
     if (!entities.hasOwnProperty(id)) {

@@ -13,6 +13,8 @@ function parseFullName(params) {
 }
 
 export default class Explore extends Component {
+  // note:
+  // params in react-router ??
   static propTypes = {
     params: PropTypes.shape({
       login: PropTypes.string,
@@ -79,10 +81,15 @@ export default class Explore extends Component {
   }
 
   handleGoClick() {
+    // note:
+    // react-router navigation mixins ----- transitionTo
     this.context.router.transitionTo(`/${this.getInputValue()}`);
   }
 
   getInputValue() {
+    // note:
+    // react v0.13 new function ( ES6 ? ) findDOMNode to
+    // replace getDOMNode
     return findDOMNode(this.refs.loginOrRepo).value;
   }
 }
