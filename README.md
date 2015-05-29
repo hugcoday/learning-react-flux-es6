@@ -95,3 +95,6 @@ In most social apps, you'll have lots of these and you want to be able to quickl
 ```
 
 See and run the source for more tips!
+
+## webpack debug option
+webpack --display-error-details

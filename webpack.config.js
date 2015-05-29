@@ -15,6 +15,7 @@ var cssExtractTextPlugin = new ExtractTextPlugin(cssBundle, {
 	allChunks: true
 });
 
+var LessPluginCleanCSS = require('less-plugin-clean-css');
 
 var nodeModulesPath = path.resolve(__dirname, 'node_modules'),
 	srcPath = path.resolve(__dirname, 'src'),
@@ -83,7 +84,11 @@ var loaders = [
 	},
 	{
 		test: /\.less$/,
-		loader: "style!css!less"
+		loader: 'style-loader!css-loader!less-loader'
+ }, // use ! to chain loaders
+	{
+		test: /\.css$/,
+		loader: 'style-loader!css-loader'
 	},
 	{
 		test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
@@ -117,6 +122,11 @@ module.exports = {
 	module: {
 		loaders: loaders,
 	},
+	lessLoader: {
+	    lessPlugins: [
+	      new LessPluginCleanCSS({advanced: true})
+	    ]
+	  },
 	resolve: {
 		extensions: ['', '.js', 'jsx']
 	},

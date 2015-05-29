@@ -15,6 +15,8 @@ var cssExtractTextPlugin = new ExtractTextPlugin(cssBundle, {
 	allChunks: true
 });
 
+var LessPluginCleanCSS = require('less-plugin-clean-css');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var nodeModulesPath = path.resolve(__dirname, 'node_modules'),
 	srcPath = path.resolve(__dirname, 'src'),
@@ -50,6 +52,9 @@ var plugins = [
 			warnings: false
 		}
 	}),
+	new ExtractTextPlugin("style.css", {
+	            allChunks: true
+	        }),
 	//new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
 	new webpack.NoErrorsPlugin(),
 ];
@@ -81,14 +86,18 @@ var loaders = [
 		},
 		include: srcPath
 	},
-	{
-		test: /\.css$/,
-		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-	},
-	{
-		test: /\.less$/,
-		loader: "style!css!less"
-	},
+	// Extract css files
+	            {
+	                test: /\.css$/,
+	                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+	            },
+	            // Optionally extract less files
+	            // or any other compile-to-css language
+	            {
+	                test: /\.less$/,
+	                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+	            },
+	            // You could also use other loaders the same way. I. e. the autoprefixer-loader
 	{
 		test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
 		loader: 'file-loader?name=[path][name].[ext]'
@@ -120,6 +129,11 @@ module.exports = {
 	module: {
 		loaders: loaders,
 	},
+	lessLoader: {
+	    lessPlugins: [
+	      new LessPluginCleanCSS({advanced: true})
+	    ]
+	  },
 	resolve: {
 		extensions: ['', '.js', 'jsx']
 	}
