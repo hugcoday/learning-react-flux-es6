@@ -1,0 +1,104 @@
+<script src="https://fb.me/react-0.13.1.js"></script>
+<script src="https://fb.me/JSXTransformer-0.13.1.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+<h1>React Context Demo</h2>
+<div id="content"></div>
+<div id="explain">
+    <h2>Explanation</h2>
+    <ul>
+    <li>
+        The <code>ItemToggle</code> component contains the li's <code>Item A</code> and <code>Item B</code>.
+        The <code>onClick</code> events in the li's are binded to the <i>Parent</i> component function that sets the <code>activeItem</code> state. The state is propagated to all child components using React context.
+    </li>
+    <li>The <code>ActiveItemPanel</code> component reads the active item using React context</li>
+    <li>To make the demo more interesting, <code>ActiveItemPanel</code> is not a direct <code>Parent</code> child. It is wrapped in a <code>DummyWrapper</code> component. If context was not used, <code>activeItem</code> would to be passed using Props from <code>Parent</code> to <code>DummyWrapper</code> and then to <code>ActiveItemPanel</code>
+    </li>
+    </ul>
+</div>
+<div>
+<pre>
+[Parent]
+  |------ ItemToggle
+  |------ [DummyWrapper]
+             |------ActiveItemPanel
+</pre>
+</div>
+<div>
+    <a href="https://blog.jscrambler.com/reactjs-communication-between-components-with-contexts/">This example is part of JScrambler's Blog - React.js: Communication between Components with Contexts</a>
+</div>
+
+<script type="text/jsx">
+var ItemToggle = React.createClass({
+  onClick: function (type) {
+    var item;
+
+    switch (type) {
+      case 'A':
+        item = "Item A";
+        break;
+      case 'B':
+        item = "Item B";
+        break;
+      default:
+        throw new Error('Unimplemented type');
+    }
+
+    this.props.setActiveItem(item);
+  },
+  render: function () {
+    return (
+      <div>Select an Item:
+        <ul>
+          <li onClick={this.onClick.bind(this, 'A')}>Item A</li>
+          <li onClick={this.onClick.bind(this, 'B')}>Item B</li>
+        </ul>
+      </div>
+    );
+  }
+});
+
+var ActiveItemPanel = React.createClass({
+    contextTypes: {
+      activeItem: React.PropTypes.any
+    },
+    render: function () {
+      return (
+        <div>
+          Active Item: {this.context.activeItem}
+        </div>
+      );
+    }
+});
+
+var DummyWrapper = React.createClass({
+  render: function () {
+    return <ActiveItemPanel />;
+  }
+});
+
+var Parent = React.createClass({
+  getInitialState: function () {
+    return {}
+  },
+  childContextTypes: {
+    activeItem: React.PropTypes.any
+  },
+  getChildContext: function () {
+    return {
+      activeItem: this.state.activeItem
+    };
+  },
+  setActiveItem: function (item) {
+    this.setState({activeItem: item});
+  },
+  render: function () {
+    return (
+      <div>
+        <ItemToggle setActiveItem={this.setActiveItem} />
+        <DummyWrapper />
+      </div>
+    );
+  }
+});
+    React.render(<Parent/>, document.getElementById('content'));
+</script>

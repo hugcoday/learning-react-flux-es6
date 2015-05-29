@@ -3,8 +3,8 @@
   "version": "0.2.0",
   "description": "A sample app featuring Flux and React Router",
   "config": {
-      "build_dir": "./build",
-      "dev_port": 8000
+    "build_dir": "./build",
+    "dev_port": 8000
   },
   "scripts": {
     "start": "node server.js",
@@ -17,6 +17,8 @@
     "flux": "^2.0.3",
     "humps": "0.0.1",
     "invariant": "^2.0.0",
+    "jwt-decode": "^1.1.0",
+    "jwt-simple": "^0.3.0",
     "keymirror": "^0.1.1",
     "normalizr": "^0.1.2",
     "react": "^0.13.3",
@@ -32,19 +34,24 @@
     "babel-core": "^5.4.7",
     "babel-eslint": "^3.1.9",
     "babel-loader": "^5.1.3",
+    "css-loader": "^0.14.4",
     "eslint": "^0.21.2",
     "eslint-loader": "^0.11.2",
     "eslint-plugin-react": "^2.3.0",
     "extract-text-webpack-plugin": "^0.8.1",
     "file-loader": "^0.8.4",
+    "jsx-loader": "^0.13.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "less-plugin-clean-css": "^1.5.0",
     "lodash": "^3.9.3",
+    "postcss-loader": "^0.4.3",
     "react-hot-loader": "^1.1.5",
+    "style-loader": "^0.12.3",
     "template-html-loader": "0.0.3",
     "webpack": "^1.9.9",
     "webpack-dev-server": "^1.9.0"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/tsingson/learning-react-flux-es6.git"

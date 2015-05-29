@@ -17,7 +17,7 @@ var cssExtractTextPlugin = new ExtractTextPlugin(cssBundle, {
 
 
 var nodeModulesPath = path.resolve(__dirname, 'node_modules'),
-	srcPath = path.resolve(__dirname, 'scripts'),
+	srcPath = path.resolve(__dirname, 'src'),
 	distPath = path.resolve(__dirname, 'build');
 
 
@@ -82,8 +82,8 @@ var loaders = [
 		include: srcPath
 	},
 	{
-		test: /\.css$/,
-		loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
+		test: /\.less$/,
+		loader: "style!css!less"
 	},
 	{
 		test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.ttf$/,
